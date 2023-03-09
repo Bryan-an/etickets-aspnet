@@ -1,0 +1,68 @@
+﻿@model Cinema
+
+@{
+    ViewData["Title"] = "Agregar un nuevo cine";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <h2 class="text-center mb-4">Agregar un nuevo cine</h2>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+
+                    <div class="text-center py-1">
+                        <img id="ProfilePicturePreview" class="border-info rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="Logo" class="form-label"></label>
+                        <input asp-for="Logo" class="form-control" />
+                        <span asp-validation-for="Logo" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="Description" class="form-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="py-4 d-flex justify-content-center gap-2">
+                        <a class="btn btn-outline-secondary" asp-action="Index">Mostrar todos</a>
+                        <input type="submit" value="Agregar" class="btn btn-outline-primary float-right" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var url = $("#Logo").val();
+
+            if (url) {
+                output.src = url;
+                $('#ProfilePicturePreview').show();
+            } else {
+                $('#ProfilePicturePreview').hide();
+            }
+        })
+        $("#Logo").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var url = $(this).val();
+
+            if (url) {
+                output.src = url;
+                $('#ProfilePicturePreview').show();
+            } else {
+                $('#ProfilePicturePreview').hide();
+            }
+        })
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@model Cinema
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <h2 class="text-center mb-4">Detalles de @Model.Name</h2>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+
+                <div class="text-center py-1">
+                    <img id="ProfilePicturePreview" class="border-info rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
+                </div>
+                <div class="py-1">
+                    <label asp-for="Logo" class="form-label"></label>
+                    <input asp-for="Logo" class="form-control" readonly />
+                    <span asp-validation-for="Logo" class="text-danger"></span>
+                </div>
+                <div class="py-1">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="py-1">
+                    <label asp-for="Description" class="form-label"></label>
+                    <input asp-for="Description" class="form-control" readonly />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="py-4 d-flex justify-content-center gap-2">
+                    <a class="btn btn-outline-secondary" asp-action="Index">Mostrar todos</a>
+                    <a class="btn btn-outline-info float-right" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var url = $("#Logo").val();
+
+            if (url) {
+                output.src = url;
+                $('#ProfilePicturePreview').show();
+            } else {
+                $('#ProfilePicturePreview').hide();
+            }
+        })
+    </script>
+}

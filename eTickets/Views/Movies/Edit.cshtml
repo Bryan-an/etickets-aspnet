@@ -1,0 +1,104 @@
+﻿@model NewMovieVM
+@using eTickets.Data;
+@using eTickets.Data.Enums;
+
+@{
+    ViewData["Title"] = "Editar película";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <h2 class="text-center mb-4">Editar película</h2>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div class="text-center py-1">
+                        <img id="ProfilePicturePreview" class="border-info rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="ImageURL" class="form-label"></label>
+                        <input asp-for="ImageURL" class="form-control" />
+                        <span asp-validation-for="ImageURL" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="Description" class="form-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="Price" class="form-label"></label>
+                        <input asp-for="Price" class="form-control" type="number" step=".01" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="StartDate" class="form-label"></label>
+                        <input asp-for="StartDate" class="form-control" type="date" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="EndDate" class="form-label"></label>
+                        <input asp-for="EndDate" class="form-control" type="date" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="MovieCategory" class="form-label"></label>
+                        <select asp-for="MovieCategory" class="form-select" asp-items="Html.GetEnumSelectList<MovieCategory>()"></select>
+                        <span asp-validation-for="MovieCategory" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="CinemaId" class="form-label"></label>
+                        <select asp-for="CinemaId" class="form-select" asp-items="ViewBag.Cinemas"></select>
+                        <span asp-validation-for="CinemaId" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="ProducerId" class="form-label"></label>
+                        <select asp-for="ProducerId" class="form-select" asp-items="ViewBag.Producers"></select>
+                        <span asp-validation-for="ProducerId" class="text-danger"></span>
+                    </div>
+                    <div class="py-1">
+                        <label asp-for="ActorIds" class="form-label"></label>
+                        <select asp-for="ActorIds" class="form-select" asp-items="ViewBag.Actors" multiple></select>
+                        <span asp-validation-for="ActorIds" class="text-danger"></span>
+                    </div>
+
+                    <div class="py-4 d-flex justify-content-center gap-2">
+                        <a class="btn btn-outline-secondary" asp-action="Index">Mostrar todos</a>
+                        <input type="submit" value="Actualizar" class="btn btn-outline-primary float-right" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var url = $("#ImageURL").val();
+
+            if (url) {
+                output.src = url;
+                $('#ProfilePicturePreview').show();
+            } else {
+                $('#ProfilePicturePreview').hide();
+            }
+        })
+        $("#ImageURL").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var url = $(this).val();
+
+            if (url) {
+                output.src = url;
+                $('#ProfilePicturePreview').show();
+            } else {
+                $('#ProfilePicturePreview').hide();
+            }
+        })
+    </script>
+}
